@@ -4,7 +4,7 @@ services:
         image: postgres
         user: postgres
         volumes:
-            - ./tmp/db:/var/lib/postgresql/data
+            - postgres-vol:/var/lib/postgresql/data
         environment:
             POSTGRES_PASSWORD: password
     web: &app_base
@@ -20,3 +20,5 @@ services:
             NODE_ENV: development
         depends_on:
             - db
+volumes:
+  postgres-vol:
