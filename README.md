@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Environment
+Ruby: 3.0.2
+Rails:6.1.4
+MeCab
 
-Things you may want to cover:
+## SetUp
+```
+$ docker compose build
+```
 
-* Ruby version
+```
+$ docker compose up
+```
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Use Webpacker
+```
+$ docker compose run web bundle exec rails webpacker:install
+```
