@@ -84,10 +84,13 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
+    mecab (0.996)
     method_source (1.0.0)
     mini_mime (1.1.0)
     minitest (5.14.4)
     msgpack (1.4.2)
+    natto (1.2.0)
+      ffi (>= 1.9.0)
     nio4r (2.5.7)
     nokogiri (1.11.7-x86_64-linux)
       racc (~> 1.4)
@@ -171,13 +174,15 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
-  x86_64-linux-musl
+  ruby
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mecab
+  natto
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
@@ -189,7 +194,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 3.0.2p107
+   ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.22
+   2.1.4
