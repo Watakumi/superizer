@@ -1,1 +1,9 @@
 <h1>This is Top Page</h1>
+
+<h2><%= @sentence %></h2>
+<div>
+  <%= form_with url: root_path, method: :get do |form| %>
+    <%= form.text_field :sentence %>
+    <%= form.submit '送信' %>
+  <% end %>
+</div>
