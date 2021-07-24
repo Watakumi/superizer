@@ -1,24 +1,38 @@
 require 'natto'
 
 class NattoClient
-  attr_accessor :text, :parsed_text, :words
+  attr_reader :text
 
   def initialize(text)
     @text = text
-    parse
   end
 
-  def parse
-    mecab_client = Natto::MeCab.new
-    @parsed_text = mecab_client.parse @text
+  def parsed_text
+    @parsed_text = mecab_client.parse text
+  end
+
+  def words
     @words = parsed_text_rows.map { |row| build_word(row) }
-    @parsed_text
+  end
+
+  def superized_sentence
+    superized_words = []
+    words.each do |word|
+      superized_words.push("超") if word.superize?
+      superized_words.push(word.text)
+    end
+
+    superized_words.join
   end
 
   private
 
+  def mecab_client
+    @mecab_client ||= Natto::MeCab.new
+  end
+
   def parsed_text_rows
-    rows = @parsed_text.split("\n")
+    rows = parsed_text.split("\n")
     rows[0...(rows.length - 1)]
   end
 
@@ -27,28 +41,22 @@ class NattoClient
     properties = row.split("\t")[1].split(',')
     Word.new(
       text: text,
-      category1: properties[0],
-      category2: properties[1],
-      category3: properties[2]
+      part_of_speech: properties[0],
+      category: properties[1],
     )
   end
 
   class Word
-    attr_reader :text, :category1, :category2, :category3
+    attr_reader :text, :part_of_speech, :category
 
-    def initialize(text: nil, category1: nil, category2: nil, category3: nil)
+    def initialize(text: nil, part_of_speech: nil, category: nil)
       @text = text
-      @category1 = category1
-      @category2 = category2
-      @category3 = category3
+      @part_of_speech = part_of_speech
+      @category = category
     end
 
-    def noun?
-      @category1 == "名詞"
-    end
-
-    def number?
-      @category2 == '数'
+    def superize?
+      category == '自立' && (part_of_speech == '動詞' || part_of_speech == '形容詞')
     end
   end
 end
