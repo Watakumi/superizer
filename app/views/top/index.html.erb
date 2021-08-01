@@ -1,10 +1,28 @@
-<h1>This is Top Page</h1>
-
-<h2><%= @sentence %></h2>
-<h2><%= @superized_sentence %></h2>
-<div>
-  <%= form_with url: root_path, method: :get do |form| %>
-    <%= form.text_field :sentence %>
-    <%= form.submit '送信' %>
-  <% end %>
+<div class="ui center aligned container margin-top">
+  <div class="ui center aligned segments">
+    <div class="ui very padded text segment">
+      <h1 class="ui header">Welcome To Souperizer!</h1>
+    </div>
+    <div class="ui center aligned very padded segment">
+      <div class="ui two column very relaxed grid">
+        <div class="middle aligned column">
+          <h2 class="ui header sentence"><%= @sentence %></h2>
+        </div>
+        <div class="middle aligned column padding-left">
+          <h2 class="ui header sentence"><%= @superized_sentence %></h2>
+        </div>
+      </div>
+      <div class="ui vertical divider">
+        => SUPERNIZE =>
+      </div>
+    </div>
+    <div class="ui very padded segment">
+      <%= form_with url: root_path, method: :get, class:  'ui form' do |form| %>
+        <div class="field">
+          <%= form.text_field :sentence %>
+        </div>
+        <%= form.submit '送信', class: "ui button" %>
+      <% end %>
+    </div>
+  </div>
 </div>
